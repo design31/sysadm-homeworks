@@ -274,7 +274,12 @@ Proto Recv-Q Send-Q Local Address           Foreign Address         State
 
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 
 
- ---
+Нарисовал [тут](https://app.diagrams.net/?src=about#G1kqqYQYqu-YSJ0Nk40DrYIdLJIz1Q3vl8) и на всякий случай скрин:
+
+![Картинка с файлом map](img/map.jpg)
+
+---
+
 ## Задание для самостоятельной отработки (необязательно к выполнению)
 
 6*. Установите Nginx, настройте в режиме балансировщика TCP или UDP.

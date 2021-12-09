@@ -87,6 +87,169 @@ default via 192.168.5.2 dev enp0s3 proto dhcp metric 100
 
 3. Проверьте открытые TCP порты в Ubuntu, какие протоколы и приложения используют эти порты? Приведите несколько примеров.
 
+Посмотрим на TCP сначала c помощью lsof:
+```
+root@zabbix:~# sudo lsof -nP -iTCP
+COMMAND       PID            USER   FD   TYPE    DEVICE SIZE/OFF NODE NAME
+sshd          834            root    3u  IPv4     24330      0t0  TCP *:22 (LISTEN)
+sshd          834            root    4u  IPv6     24341      0t0  TCP *:22 (LISTEN)
+apache2       869            root    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+mysqld        915           mysql   22u  IPv4     25718      0t0  TCP 127.0.0.1:33060 (LISTEN)
+mysqld        915           mysql   35u  IPv4     25723      0t0  TCP 127.0.0.1:3306 (LISTEN)
+zabbix_se    1011          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1011          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1017          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1017          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1030          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1030          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1031          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1031          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1032          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1032          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1033          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1033          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1034          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1034          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1035          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1035          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1036          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1036          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1037          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1037          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1038          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1038          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1039          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1039          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1040          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1040          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1041          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1041          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1042          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1042          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1043          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1043          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1048          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1048          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1050          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1050          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1056          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1056          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1057          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1057          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1059          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1059          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1062          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1062          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1066          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1066          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1067          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1067          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1068          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1068          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1070          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1070          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1071          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1071          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1074          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1074          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1075          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1075          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1076          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1076          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1077          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1077          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1078          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1078          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1079          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1079          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1080          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1080          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1081          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1081          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1082          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1082          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1083          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1083          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1084          zabbix    4u  IPv4     26008      0t0  TCP *:10051 (LISTEN)
+zabbix_se    1084          zabbix    5u  IPv6     26009      0t0  TCP *:10051 (LISTEN)
+zabbix_ag  180515          zabbix    4u  IPv4   5282009      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180515          zabbix    5u  IPv6   5282010      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180517          zabbix    4u  IPv4   5282009      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180517          zabbix    5u  IPv6   5282010      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180518          zabbix    4u  IPv4   5282009      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180518          zabbix    5u  IPv6   5282010      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180519          zabbix    4u  IPv4   5282009      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180519          zabbix    5u  IPv6   5282010      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180520          zabbix    4u  IPv4   5282009      0t0  TCP *:10050 (LISTEN)
+zabbix_ag  180520          zabbix    5u  IPv6   5282010      0t0  TCP *:10050 (LISTEN)
+apache2   1180848        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1180849        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1180849        www-data   11u  IPv6 462574602      0t0  TCP 192.168.5.6:80->192.168.5.YYY:55111 (ESTABLISHED)
+apache2   1180961        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1181020        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1181073        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1181073        www-data   11u  IPv6 462574658      0t0  TCP 192.168.5.6:80->192.168.5.XXX:64118 (ESTABLISHED)
+apache2   1181135        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1181182        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1181185        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+apache2   1181186        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+sshd      1181231            root    4u  IPv4 462571821      0t0  TCP 192.168.5.6:22->192.168.5.XXX:64089 (ESTABLISHED)
+sshd      1181366              ss    4u  IPv4 462571821      0t0  TCP 192.168.5.6:22->192.168.5.XXX:64089 (ESTABLISHED)
+apache2   1181404        www-data    4u  IPv6     24665      0t0  TCP *:80 (LISTEN)
+systemd-r 2381040 systemd-resolve   13u  IPv4 246031027      0t0  TCP 127.0.0.53:53 (LISTEN)
+```
+И с помощью netstat:
+```
+root@zabbix:~# netstat -ntp
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 192.168.5.6:35832       192.168.5.UUU:10050     TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:44154         TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:45696         TIME_WAIT   -
+tcp        0      0 192.168.5.6:48104       192.168.5.YYY:10050     TIME_WAIT   -
+tcp        0    224 192.168.5.6:22          192.168.5.XXX:64089     ESTABLISHED 1181231/sshd: ss [p
+tcp        0      0 127.0.0.1:10050         127.0.0.1:44350         TIME_WAIT   -
+tcp        0      0 127.0.0.1:43742         127.0.0.1:10050         TIME_WAIT   -
+tcp        0      0 192.168.5.6:35950       192.168.5.YYY:10050     TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:44952         TIME_WAIT   -
+tcp        0      0 192.168.5.6:48902       192.168.5.ZZZ:10050     TIME_WAIT   -
+tcp        0      0 192.168.5.6:56164       192.168.5.XXX:445       ESTABLISHED -
+tcp        0      0 127.0.0.1:10051         127.0.0.1:36504         TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:44092         TIME_WAIT   -
+tcp        0      0 192.168.5.6:33894       192.168.5.JJJ:10050     TIME_WAIT   -
+tcp        0      0 192.168.5.6:49082       192.168.5.KKK:10050     TIME_WAIT   -
+tcp        0      0 192.168.5.6:49726       192.168.5.YYY:10050     ESTABLISHED 1050/zabbix_server:
+tcp        0      0 192.168.5.6:55622       192.168.5.FFF:10050     TIME_WAIT   -
+tcp        0      0 127.0.0.1:10051         127.0.0.1:34940         TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:44792         TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:43942         TIME_WAIT   -
+tcp        0      0 192.168.5.6:35628       192.168.5.OOO:10050     TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:44042         TIME_WAIT   -
+tcp        0      0 127.0.0.1:10050         127.0.0.1:44668         TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55214      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55291      ESTABLISHED 1181542/apache2
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55290      ESTABLISHED 1180848/apache2
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55293      ESTABLISHED 1181186/apache2
+tcp6       0      0 192.168.5.6:80          192.168.5.XXX:64484     ESTABLISHED 1180849/apache2
+tcp6       0      0 192.168.5.6:80          192.168.5.XXX:64472     TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55221      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55208      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55287      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5TTT:55211      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.XXX:64476     TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55207      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55209      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55210      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.XXX:64471     TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55217      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55292      ESTABLISHED 1181135/apache2
+tcp6       0      0 192.168.5.6:80          192.168.5.TTT:55222      TIME_WAIT   -
+tcp6       0      0 192.168.5.6:80          192.168.5.XXX:64475     TIME_WAIT   -
+```
+В принципе по номерам портов видно что порты TCP используются заббиксом, апачем, http и ssh. А в выводе lsof так вообще всё подписано    
+
+---
+
 4. Проверьте используемые UDP сокеты в Ubuntu, какие протоколы и приложения используют эти порты?
 
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 

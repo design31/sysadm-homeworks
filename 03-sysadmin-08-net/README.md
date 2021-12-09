@@ -252,6 +252,26 @@ tcp6       0      0 192.168.5.6:80          192.168.5.XXX:64475     TIME_WAIT   
 
 4. Проверьте используемые UDP сокеты в Ubuntu, какие протоколы и приложения используют эти порты?
 
+По UDP портам вывод скромнее:  
+```
+root@zabbix:~# lsof -nP -iUDP
+COMMAND       PID            USER   FD   TYPE    DEVICE SIZE/OFF NODE NAME
+chronyd       767         _chrony    5u  IPv4     22545      0t0  UDP 127.0.0.1:323
+chronyd       767         _chrony    6u  IPv6     22546      0t0  UDP [::1]:323
+snmpd         791     Debian-snmp    6u  IPv4     24612      0t0  UDP 127.0.0.1:161
+snmpd         791     Debian-snmp    7u  IPv6     24613      0t0  UDP [::1]:161
+systemd-r 2381040 systemd-resolve   12u  IPv4 246031026      0t0  UDP 127.0.0.53:53
+```
+Netstat:  
+```
+root@zabbix:~# netstat -nu
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State
+```
+Здесь только протоколы chrony, SNMP и DNS используют порты.  
+
+---
+
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 
 
  ---

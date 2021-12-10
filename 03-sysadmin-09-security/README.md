@@ -331,6 +331,7 @@ Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-41-generic x86_64)
 Your Hardware Enablement Stack (HWE) is supported until April 2025.
 *** System restart required ***
 Last login: Fri Dec 10 16:15:43 2021 from 192.168.5.174
+us@ubuntu:~$
 ```
 
 ---

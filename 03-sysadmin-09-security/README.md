@@ -276,7 +276,62 @@ TLSv1.3
 
 5. Установите на Ubuntu ssh сервер, сгенерируйте новый приватный ключ. Скопируйте свой публичный ключ на другой сервер. Подключитесь к серверу по SSH-ключу.
  
+Сгененрируем ключ:
+```
+ss@zabbix:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ss/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/ss/.ssh/id_rsa
+Your public key has been saved in /home/ss/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:Pq5OEhY4AHjDe75E4RWV+9VVPaQ1RpJ5cNYT8KYAiU4 ss@zabbix
+The key's randomart image is:
++---[RSA 3072]----+
+|=.    .ooo.  +BX*|
+|..+.. .E...  oO+=|
+| .o+.oo  . . o.+o|
+|  ..+. ..   o +  |
+|   +o   S. . .   |
+|   .o. .  .      |
+|   .... o        |
+|    .o . .       |
+|     .o..        |
++----[SHA256]-----+
+```
+Cкопируем его на удаленный сервер:
+```
+ss@zabbix:~$ ssh-copy-id us@192.168.5.162 -p 2222
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/ss/.ssh/id_rsa.pub"
+The authenticity of host '[192.168.5.162]:2222 ([192.168.5.162]:2222)' can't be established.
+ECDSA key fingerprint is SHA256:E/WNI/LfzWbxwpZRHlXMF88r5remcmdHeXbsclk2cEU.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+us@192.168.5.162's password:
 
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh -p '2222' 'us@192.168.5.162'"
+and check to make sure that only the key(s) you wanted were added.
+
+```
+И подключимся:
+```
+ss@zabbix:~$ ssh us@192.168.5.162 -p 2222
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-41-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+*** System restart required ***
+Last login: Fri Dec 10 16:15:43 2021 from 192.168.5.174
+```
 
 ---
 

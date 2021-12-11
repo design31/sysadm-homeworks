@@ -338,6 +338,41 @@ us@ubuntu:~$
 
 6. Переименуйте файлы ключей из задания 5. Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера.
 
+Переименую ключ:
+```
+ss@zabbix:~/.ssh$ mv id_rsa webserver.key
+```
+Создам файл `config` следующего наполнения:
+```
+ss@zabbix:~/.ssh$ nano config
+  GNU nano 4.8                                                        config
+Host webserver
+HostName 192.168.5.162
+IdentityFile ~/.ssh/webserver.key
+User us
+Port 2222
+#StrictHostKeyChecking no
+```
+Попробую подключиться:
+```
+ss@zabbix:~/.ssh$ ssh webserver
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-41-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+0 updates can be applied immediately.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+*** System restart required ***
+Last login: Sat Dec 11 13:00:09 2021 from 192.168.5.6
+us@ubuntu:~$
+```
+Profit!
+
+---
+
 7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.
 
  ---

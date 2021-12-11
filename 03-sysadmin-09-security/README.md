@@ -391,6 +391,27 @@ tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 b
 
 8*. Просканируйте хост scanme.nmap.org. Какие сервисы запущены?
 
+```
+us@ubuntu:~$ nmap -sV scanme.nmap.org
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-12-11 21:37 +07
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.22s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+Not shown: 996 closed ports
+PORT      STATE SERVICE    VERSION
+22/tcp    open  ssh        OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+80/tcp    open  http       Apache/2.4.7 (Ubuntu)
+9929/tcp  open  nping-echo Nping echo
+31337/tcp open  tcpwrapped
+
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 156.76 seconds
+```
+
+---
+
 9*. Установите и настройте фаервол ufw на web-сервер из задания 3. Откройте доступ снаружи только к портам 22,80,443
 
 

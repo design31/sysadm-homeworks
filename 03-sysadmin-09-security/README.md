@@ -414,5 +414,24 @@ Nmap done: 1 IP address (1 host up) scanned in 156.76 seconds
 
 9*. Установите и настройте фаервол ufw на web-сервер из задания 3. Откройте доступ снаружи только к портам 22,80,443
 
+```
+us@ubuntu:~$ sudo apt install ufw
+us@ubuntu:~$ sudo ufw allow 2222/TCP
+us@ubuntu:~$ sudo ufw allow 80/TCP
+us@ubuntu:~$ sudo ufw allow 443/TCP
+us@ubuntu:~$ sudo ufw enable
+
+us@ubuntu:~$ sudo ufw status numbered
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 80/tcp                     ALLOW IN    Anywhere
+[ 2] 2222/tcp                   ALLOW IN    Anywhere
+[ 3] 443/tcp                    ALLOW IN    Anywhere
+[ 4] 80/tcp (v6)                ALLOW IN    Anywhere (v6)
+[ 5] 2222/tcp (v6)              ALLOW IN    Anywhere (v6)
+[ 6] 443/tcp (v6)               ALLOW IN    Anywhere (v6)
+```
 
  ---

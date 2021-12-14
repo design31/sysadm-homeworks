@@ -55,7 +55,59 @@ done
 	
  ### 3. Необходимо написать скрипт, который проверяет доступность трёх IP: 192.168.0.1, 173.194.222.113, 87.250.250.242 по 80 порту и записывает результат в файл log. Проверять доступность необходимо пять раз для каждого узла.
 
-
+Проверять доступность решил с помощью netstat:
+```
+#!/usr/bin/env bash
+a=5
+while (($a > 0))
+do
+date >> nc.log
+nc -zv 192.168.5.108 80 &>> nc.log
+sleep 1
+date >> nc.log
+nc -zv 192.168.5.162 80 &>> nc.log
+sleep 1
+date >> nc.log
+nc -zv 192.168.5.2 80 &>> nc.log
+sleep 1
+let "a=a-1"
+done
+cat -n nc.log #выведем итог и пронумеруем строки для наглядности
+```
+Получается что-то вроде:
+```
+us@ubuntu:~$ ./script.sh
+     1  Вт 14 дек 2021 12:23:26 +07
+     2  Connection to 192.168.5.108 80 port [tcp/http] succeeded!
+     3  Вт 14 дек 2021 12:23:27 +07
+     4  Connection to 192.168.5.162 80 port [tcp/http] succeeded!
+     5  Вт 14 дек 2021 12:23:28 +07
+     6  Connection to 192.168.5.2 80 port [tcp/http] succeeded!
+     7  Вт 14 дек 2021 12:23:29 +07
+     8  Connection to 192.168.5.108 80 port [tcp/http] succeeded!
+     9  Вт 14 дек 2021 12:23:30 +07
+    10  Connection to 192.168.5.162 80 port [tcp/http] succeeded!
+    11  Вт 14 дек 2021 12:23:31 +07
+    12  Connection to 192.168.5.2 80 port [tcp/http] succeeded!
+    13  Вт 14 дек 2021 12:23:32 +07
+    14  Connection to 192.168.5.108 80 port [tcp/http] succeeded!
+    15  Вт 14 дек 2021 12:23:33 +07
+    16  Connection to 192.168.5.162 80 port [tcp/http] succeeded!
+    17  Вт 14 дек 2021 12:23:34 +07
+    18  Connection to 192.168.5.2 80 port [tcp/http] succeeded!
+    19  Вт 14 дек 2021 12:23:35 +07
+    20  Connection to 192.168.5.108 80 port [tcp/http] succeeded!
+    21  Вт 14 дек 2021 12:23:36 +07
+    22  Connection to 192.168.5.162 80 port [tcp/http] succeeded!
+    23  Вт 14 дек 2021 12:23:37 +07
+    24  Connection to 192.168.5.2 80 port [tcp/http] succeeded!
+    25  Вт 14 дек 2021 12:23:38 +07
+    26  Connection to 192.168.5.108 80 port [tcp/http] succeeded!
+    27  Вт 14 дек 2021 12:23:39 +07
+    28  Connection to 192.168.5.162 80 port [tcp/http] succeeded!
+    29  Вт 14 дек 2021 12:23:40 +07
+    30  Connection to 192.168.5.2 80 port [tcp/http] succeeded!
+```
 
 ---
 
